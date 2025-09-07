@@ -6,6 +6,12 @@
 AAuraCharacterBase::AAuraCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	// note* You dont need a TEXT macro to Fnames
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+	// next we attach the weapon to a socket on a mesh. Socket is named as WeaponHandSocket
+	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
+	// Weapon should not have any collision
+	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 }
 void AAuraCharacterBase::BeginPlay()
