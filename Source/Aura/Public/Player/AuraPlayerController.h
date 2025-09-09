@@ -7,6 +7,8 @@
 #include "AuraPlayerController.generated.h"
 
 class UInputMappingContext; // forward declaration. Also need to add EnhancedInput in to Aura.Build.cs so we can access that module
+class UInputAction;
+struct FInputActionValue;	// Forward declared using struct
 /**
  * 
  */
@@ -21,9 +23,14 @@ public:
 protected:
 	// We need to override Begin play
 	virtual void BeginPlay() override;
-
+	virtual void SetupInputComponent() override;
 private:
 	// first we need a pointer to UIMC
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> AuraContext;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> MoveAction;
+
+	void Move(const FInputActionValue& InputActionValue);
 };
