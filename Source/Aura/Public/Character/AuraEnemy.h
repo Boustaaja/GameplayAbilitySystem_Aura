@@ -17,5 +17,8 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface //
 	
 public:
 	virtual void HighlightActor() override; // We need to override these inherited functions
-	virtual void UnHighligtActor() override;
+	virtual void UnHighlightActor() override;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bHighlighted = false;
 };

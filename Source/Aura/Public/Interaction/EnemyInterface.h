@@ -22,7 +22,7 @@ class AURA_API IEnemyInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	// A function that hihglights the enemy when hoovered over. We can use these functions in all actors that implements this interface
+	// A function that highlights the enemy when hoovered over. We can use these functions in all actors that implements this interface
 	virtual void HighlightActor() = 0; // 0; means it is now a pure virtual function. needs to be implemented in enemy class
-	virtual void UnHighligtActor() = 0;
+	virtual void UnHighlightActor() = 0;
 };

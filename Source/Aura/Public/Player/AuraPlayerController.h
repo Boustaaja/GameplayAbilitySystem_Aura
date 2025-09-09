@@ -4,11 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include <Interaction/EnemyInterface.h>
 #include "AuraPlayerController.generated.h"
 
 class UInputMappingContext; // forward declaration. Also need to add EnhancedInput in to Aura.Build.cs so we can access that module
 class UInputAction;
+//class IEnemyInterface;
 struct FInputActionValue;	// Forward declared using struct
+
 /**
  * 
  */
@@ -20,6 +23,7 @@ class AURA_API AAuraPlayerController : public APlayerController
 public:
 	// constructor
 	AAuraPlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
 protected:
 	// We need to override Begin play
 	virtual void BeginPlay() override;
@@ -33,4 +37,10 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const FInputActionValue& InputActionValue);
+
+	// this function is going to trace under the cursor.
+	void CursorTrace();
+	// we will need the next interface wrappers for highligting enemy
+	TScriptInterface<IEnemyInterface> LastActor;
+	TScriptInterface<IEnemyInterface> ThisActor;
 };
