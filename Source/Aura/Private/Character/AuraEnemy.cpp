@@ -38,3 +38,11 @@ void AAuraEnemy::UnHighlightActor()
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
 }
+
+void AAuraEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Let's create a pointer. owning actor will be this, and avatar actor will also be this on enemy
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}
