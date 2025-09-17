@@ -13,6 +13,7 @@ AAuraCharacterBase::AAuraCharacterBase()
 	// Weapon should not have any collision
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+
 }
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 {
