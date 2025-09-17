@@ -2,12 +2,24 @@
 
 
 #include "Character/AuraEnemy.h"
+
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAttributeSet.h"
 #include "Aura/Aura.h"
 
 AAuraEnemy::AAuraEnemy()
 {
+
 	// We would like to preset the collision into a specific channel
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+	// In enemy, we use ASC and Set directly to a enemy character. Aura Character these are in PlayerState
+	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
+	// Let's make sure this is replicated
+	AbilitySystemComponent->SetIsReplicated(true);
+
+	// Also need to construct our Attribute set
+	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 }
 
 void AAuraEnemy::HighlightActor()
