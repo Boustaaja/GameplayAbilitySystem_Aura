@@ -13,5 +13,15 @@ UCLASS()
 class AURA_API UAuraAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()
+	// LISÄTTY ENNEN AIKOJAAN!!!
+//public:
+//	void AbilityActorInfoSet();
+//
+//	FEffectAssetTags EffectAssetTags;
+public:
+	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
+
+protected:
+
 	
 };

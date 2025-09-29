@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemComponent.h" // Lisätty ehkä ennen aikojaan!!!!
 #include "AuraCharacterBase.generated.h"
 
 class UAbilitySystemComponent;
@@ -36,5 +37,27 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	// TÄSTÄ ALKAA LISÄYKSET ENNEN AIKOJAAN JOS ONGELMIA POISTA!!!
+	virtual void InitAbilityActorInfo();
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
+
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float level) const;
+	void InitializeDefaultAttributes() const;
+
+	// TÄHÄN LOPPPUU LISÄYKSET ENNEN AIKOJAAN!!!!!
+	void AddCharacterAbilities();
+private:
+	// ABilities that should be given from the beginning of the game
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray < TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 };
