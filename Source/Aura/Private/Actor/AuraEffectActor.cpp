@@ -18,16 +18,16 @@ void AAuraEffectActor::BeginPlay()
 }
 
 // We are going to call this when overlapping, for that we need a GE
-void AAuraEffectActor::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass)
+void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass)
 {
 		// GAS has it's own Library. Needs target actor. Returns the ASC
-		UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Target);
+		UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 		if (TargetASC == nullptr) return; // If actor has no ASC do nothing
 
 		check(GameplayEffectClass) // If the effect is unset(nullptr), that is something to check
 		FGameplayEffectContextHandle EffectContextHandle =  TargetASC->MakeEffectContext();
 		EffectContextHandle.AddSourceObject(this); // Who did this?
-		FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.0f, EffectContextHandle); // returns spec handle
+		const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.0f, EffectContextHandle); // returns spec handle
 		TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 }
 
