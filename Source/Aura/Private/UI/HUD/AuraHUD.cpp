@@ -13,7 +13,7 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 		// NewObject is how we can create a new object
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
-
+		OverlayWidgetController->BindCallbacksToDependencies();
 		return OverlayWidgetController;
 	}
 	return OverlayWidgetController;
@@ -25,11 +25,11 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	// 2. WidgetController
 	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out BP_AuraHUD"));
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller class uninitialized, please fill out BP_AuraHUD"));
-	// createWidget returns a user widget pointer
-	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+
+	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass); // createWidget returns a user widget pointer
 	OverlayWidget = Cast<UAuraUserWidget>(Widget);
-	// creating the widgetController
-	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
+	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS); // creating the widgetController
+
 	// now we can construct the widget controller, so lets call the function
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 	// And then tie the widget and controller together

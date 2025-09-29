@@ -15,3 +15,7 @@ void UAuraWidgetController::BroadcastInitialValues()
 {
 	// This is just a Base class, so this is going to be empty
 }
+
+void UAuraWidgetController::BindCallbacksToDependencies()
+{
+}
