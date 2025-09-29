@@ -8,6 +8,28 @@
 
 class UAbilitySystemComponent;
 class UAttributeSet;
+
+USTRUCT(BlueprintType)
+struct FWidgetControllerParams
+{
+	GENERATED_BODY()
+
+	FWidgetControllerParams() {}
+	FWidgetControllerParams(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS) : PlayerController(PC), PlayerState(PS), AbilitySystemComponent(ASC), AttributeSet(AS) {}
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<APlayerController> PlayerController = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintreadWrite)
+	TObjectPtr <APlayerState> PlayerState = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintreadWrite)
+	TObjectPtr <UAbilitySystemComponent> AbilitySystemComponent = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintreadWrite)
+	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
+
+};
 /**
  * 
  */
@@ -17,6 +39,11 @@ class AURA_API UAuraWidgetController : public UObject
 	GENERATED_BODY()
 	// This will be responsible for getting data and broadcasting it over to any widgets that have their controller set to it
 	// Variables for which classes data we are interested of
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<APlayerController> PlayerController;

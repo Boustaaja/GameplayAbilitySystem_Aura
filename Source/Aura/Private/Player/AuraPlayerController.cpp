@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-#include "EnhancedInputSubsystems.h"
 #include "Player/AuraPlayerController.h"
+#include "EnhancedInputSubsystems.h"
 #include <EnhancedInputComponent.h>
 #include <Interaction/EnemyInterface.h>
 
@@ -83,8 +83,11 @@ void AAuraPlayerController::BeginPlay()
 	check(AuraContext); // is AuraContext set or not
 	// Subsystems are singletons, and exist only one at a duration of the program. With this we can add MC
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(AuraContext, 0);
+
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;

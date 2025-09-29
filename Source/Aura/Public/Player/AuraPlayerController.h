@@ -41,6 +41,7 @@ private:
 	// this function is going to trace under the cursor.
 	void CursorTrace();
 	// we will need the next interface wrappers for highligting enemy
+
 	TScriptInterface<IEnemyInterface> LastActor;
 	TScriptInterface<IEnemyInterface> ThisActor;
 };
